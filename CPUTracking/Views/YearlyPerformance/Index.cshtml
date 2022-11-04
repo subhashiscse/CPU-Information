@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Yearly Performance List";
+}
+<h1>@ViewData["Title"]</h1>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Serial</th>
+        <th>Name</th>
+        <th>Session</th>
+        <th>Contest Performance</th>
+        <th>Problem Solving Performance</th>
+        <th>Action</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Subhashis Mollick</td>
+        <td>2014-15</td>
+        <td>10</td>
+        <td>20</td>
+        <td>
+            <a asp-action="Edit" asp-route-id="1">Edit</a>
+            <a asp-action="Delete" asp-route-id="1">Delete</a>
+        </td>
+
+    </tr>
+</table>

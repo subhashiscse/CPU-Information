@@ -1,0 +1,56 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = CPUTracking
+build_property.RootNamespace = CPUTracking
+build_property.ProjectDir = D:\R&D\Personal Project\CPUTracking\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\R&D\Personal Project\CPUTracking
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/IndividualPerformance/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5kaXZpZHVhbFBlcmZvcm1hbmNlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/MemberInfo/Member.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVySW5mb1xNZW1iZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/MonthlyPerformance/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9udGhseVBlcmZvcm1hbmNlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/YearlyPerformance/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWWVhcmx5UGVyZm9ybWFuY2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/R&D/Personal Project/CPUTracking/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-563li1t4kb
