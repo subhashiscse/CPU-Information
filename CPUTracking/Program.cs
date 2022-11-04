@@ -1,5 +1,8 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using CPUTracking.Models;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<DatabaseSettings>(
+    builder.Configuration.GetSection("CPUInfoDatabase"));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

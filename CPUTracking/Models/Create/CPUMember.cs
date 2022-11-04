@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace CPUTracking.Models.Create
 {
     public class CPUMember
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public int ItemId { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
@@ -18,6 +22,7 @@ namespace CPUTracking.Models.Create
         public string? AtCoderId { get; set; }
         public string? LightOjId { get; set; }
         public string? TophId { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }
 

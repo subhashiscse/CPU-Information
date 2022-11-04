@@ -14,6 +14,8 @@
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore" />
     <None Remove="Views\MemberInfo\" />
     <None Remove="Models\Create\" />
+    <None Remove="MongoDB.Driver" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
@@ -24,10 +26,12 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\MemberInfo\" />
     <Folder Include="Models\Create\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Views\IndividualPerformance">

@@ -11,7 +11,7 @@
     "CPUTracking": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:61948",
+      "applicationUrl": "http://localhost:64749",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
