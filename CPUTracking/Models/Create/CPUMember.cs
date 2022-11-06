@@ -12,7 +12,7 @@ namespace CPUTracking.Models.Create
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public int ItemId { get; set; }
+        public int Id { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Session { get; set; }
