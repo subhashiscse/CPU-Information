@@ -25,11 +25,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\MemberInfo\" />
     <Folder Include="Models\Create\" />
     <Folder Include="Services\" />
   </ItemGroup>

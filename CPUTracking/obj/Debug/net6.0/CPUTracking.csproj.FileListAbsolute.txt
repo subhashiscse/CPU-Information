@@ -1627,3 +1627,6 @@ D:\R&D\Personal Project\CPUTracking\obj\Debug\net6.0\refint\CPUTracking.dll
 D:\R&D\Personal Project\CPUTracking\obj\Debug\net6.0\CPUTracking.pdb
 D:\R&D\Personal Project\CPUTracking\obj\Debug\net6.0\CPUTracking.genruntimeconfig.cache
 D:\R&D\Personal Project\CPUTracking\obj\Debug\net6.0\ref\CPUTracking.dll
+D:\R&D\Personal Project\CPUTracking\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGeneration.dll
+D:\R&D\Personal Project\CPUTracking\bin\Debug\net6.0\dotnet-aspnet-codegenerator-design.dll
+D:\R&D\Personal Project\CPUTracking\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll

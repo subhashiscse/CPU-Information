@@ -1,18 +1,37 @@
-﻿@{
+﻿@model IEnumerable<CPUTracking.Models.Create.CPUMember>
+@{
     ViewData["Title"] = "Member List";
 }
 <h1>@ViewData["Title"]</h1>
 <button class="btn btn-primary">Add New Member</button>
 <table class="table table-bordered table-responsive table-hover">
-    <tr>
-        <th>Serial</th>
-        <th>Name</th>
-        <th>Session</th>
-        <th>Email</th>
-        <th>Codeforces ID</th>
-        <th>Codechef ID</th>
-        <th>Atcoder ID</th>
-        <th>Lightoj ID</th>
-        <th>Action</th>
-    </tr>
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="EditMember" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="DeleteMember" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
 </table>
