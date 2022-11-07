@@ -36,7 +36,8 @@ namespace CPUTracking.Controllers
         }
         public IActionResult EditMember(string Id)
         {
-            var member = _memberList.Find(c => c.Id == Id).FirstOrDefault();
+            var o_id = new ObjectId(Id);
+            var member = _memberList.Find(c => c.Id == o_id).FirstOrDefault();
             if (member == null)
             {
                 return NotFound();
@@ -46,7 +47,7 @@ namespace CPUTracking.Controllers
         [HttpPost]
         public ActionResult EditMember(CPUMember member)
         {
-            if (string.IsNullOrEmpty(member.Id))
+            if (string.IsNullOrEmpty(member.Id.ToString()))
             {
                 ViewBag.Mgs = "Please provide id";
                 return View(member);
@@ -55,7 +56,7 @@ namespace CPUTracking.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult DeleteMember(string Id)
+        public IActionResult DeleteMember(ObjectId Id)
         {
             var member = _memberList.Find(c => c.Id == Id).FirstOrDefault();
             if (member == null)

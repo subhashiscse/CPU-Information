@@ -12,20 +12,20 @@
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:64749",
-        "environmentVariables": {
-            "ASPNETCORE_ENVIRONMENT": "Development",
-            "DATABASE_NAME": "CPUTracking",
-            "mEMBER_COLLECTION_NAME": "Members"
-        }
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_NAME": "CPUTracking",
+        "mEMBER_COLLECTION_NAME": "Members"
+      }
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-        "environmentVariables": {
-            "ASPNETCORE_ENVIRONMENT": "Development",
-            "DATABASE_NAME": "CPUTracking",
-            "mEMBER_COLLECTION_NAME": "Members"
-        }
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_NAME": "CPUTracking",
+        "mEMBER_COLLECTION_NAME": "Members"
+      }
     }
   }
 }

@@ -11,8 +11,8 @@ namespace CPUTracking.Models.Create
     public class CPUMember
     {
         [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public string Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public ObjectId Id { get; set; }
         public string? Name { get; set; }
         /*public string? Email { get; set; }
         public string? Session { get; set; }
