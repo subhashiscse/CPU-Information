@@ -23,6 +23,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kaXZpZHVhbFBlcmZvcm1hbmNlL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/Views/MemberInfo/CreateMember.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWVtYmVySW5mby9DcmVhdGVNZW1iZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/Views/MemberInfo/DeleteMember.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWVtYmVySW5mby9EZWxldGVNZW1iZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/Views/MemberInfo/EditMember.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWVtYmVySW5mby9FZGl0TWVtYmVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

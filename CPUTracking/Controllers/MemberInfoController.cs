@@ -34,10 +34,23 @@ namespace CPUTracking.Controllers
             var data = _memberList.Find(FilterDefinition<CPUMember>.Empty).ToList();
             return View(data);
         }
+        public IActionResult CreateMember()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateMember(CPUMember member)
+        {
+            member.Id = Guid.NewGuid().ToString();
+            _memberList.InsertOne(member);
+            //ViewBag.Mgs = "Student has been saved.";
+            return RedirectToAction("Member");
+        }
+
         public IActionResult EditMember(string Id)
         {
-            var o_id = new ObjectId(Id);
-            var member = _memberList.Find(c => c.Id == o_id).FirstOrDefault();
+            //var o_id = new ObjectId(Id);
+            var member = _memberList.Find(c => c.Id == Id).FirstOrDefault();
             if (member == null)
             {
                 return NotFound();
@@ -53,19 +66,26 @@ namespace CPUTracking.Controllers
                 return View(member);
             }
             _memberList.ReplaceOne(c => c.Id == member.Id, member);
-            return RedirectToAction("Index");
+            return RedirectToAction("Member");
         }
 
-        public IActionResult DeleteMember(ObjectId Id)
+        public ActionResult DeleteMember(string id)
         {
-            var member = _memberList.Find(c => c.Id == Id).FirstOrDefault();
+            var member= _memberList.Find(c => c.Id == id).FirstOrDefault();
             if (member == null)
             {
                 return NotFound();
             }
             return View(member);
-
         }
+
+        [HttpPost]
+        public ActionResult DeleteMember(CPUMember member)
+        {
+            _memberList.DeleteOne(c => c.Id == member.Id);
+            return RedirectToAction("Member");
+        }
+
     }
 }
 
