@@ -30,12 +30,19 @@ namespace CPUTracking.Controllers
         [HttpPost]
         public IActionResult CreateSession(Session session)
         {
-            session.Id = Guid.NewGuid().ToString();
-            _sessionList.InsertOne(session);
-            ViewBag.Mgs = "Session Added SuccessFully";
-            return RedirectToAction("SessionList");
+            try
+            {
+                session.Id = Guid.NewGuid().ToString();
+                _sessionList.InsertOne(session);
+                ViewBag.Mgs = "Session Added SuccessFully";
+                return RedirectToAction("SessionList");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Mgs = "Session Already Exists";
+                throw;
+            }
         }
-
         public IActionResult EditSession(string Id)
         {
             //var o_id = new ObjectId(Id);
