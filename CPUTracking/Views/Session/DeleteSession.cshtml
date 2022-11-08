@@ -1,14 +1,14 @@
-﻿@model CPUTracking.Models.Create.CPUMember
+﻿@model CPUTracking.Models.Create.Session
 
 @{
-    ViewData["Title"] = "Delete Member";
+    ViewData["Title"] = "Delete Session";
 }
 
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Student</h4>
+    <h4>Session</h4>
     <hr />
     <dl class="row">
         @*<dt class = "col-sm-2">
@@ -23,18 +23,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
     </dl>
 
-    <form asp-action="DeleteMember">
+    <form asp-action="DeleteSession">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="MemberList">Back to List</a>
+        <a asp-action="SessionList">Back to List</a>
     </form>
 </div>
 

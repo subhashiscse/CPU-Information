@@ -30,7 +30,6 @@
     <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Create\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>

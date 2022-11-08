@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using System.ComponentModel.DataAnnotations;
+using CPUTracking.Models.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace CPUTracking.Models.Create
 {
-    public class CPUMember
+    public class CPUMember : GenericPropertyForCRUD
     {
         [BsonId]
         [BsonRepresentation(BsonType.String)]
@@ -17,6 +13,7 @@ namespace CPUTracking.Models.Create
         public String Id { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
+        public string? SessionId { get; set; }
         public string? Session { get; set; }
         public string? PhoneNumber { get; set; }
         public string? CodeforcesId { get; set; }

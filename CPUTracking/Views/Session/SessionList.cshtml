@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CPUTracking.Models.Create.Session>
+@{
+    ViewData["Title"] = "Session List";
+}
+<h1>@ViewData["Title"]</h1>
+
+<a class="btn btn-primary" asp-action="CreateSession">Create New</a>
+<hr />
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.Id)
+            </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="EditSession" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="DeleteSession" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

@@ -1,16 +1,16 @@
-﻿@model CPUTracking.Models.Create.CPUMember
+﻿@model CPUTracking.Models.Create.Session
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create Member</h1>
+<h1>Create Session</h1>
 
 <h5>@ViewBag.Mgs</h5>
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="CreateMember" method="post">
+        <form asp-action="CreateSession" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
                     <label asp-for="Id" class="control-label"></label>
@@ -22,11 +22,6 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
             <hr />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -36,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="MemberList">Back to List</a>
+    <a asp-action="SessionList">Back to List</a>
 </div>
 
 @section Scripts {

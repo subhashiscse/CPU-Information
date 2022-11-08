@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using CPUTracking.Models.Create;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,9 +27,9 @@ namespace CPUTracking.Controllers
             //var data = _memberList.Find(FilterDefinition<CPUMember>.Empty).ToList();
             return View();
         }
-        public IActionResult Member()
+        public IActionResult MemberList()
         {
-            var data = _memberList.Find(FilterDefinition<CPUMember>.Empty).ToList();
+            var data = _memberList.Find(FilterDefinition<CPUMember>.Empty).SortBy(c => c.CreateDate).ToList();
             return View(data);
         }
         public IActionResult CreateMember()
@@ -43,8 +41,8 @@ namespace CPUTracking.Controllers
         {
             member.Id = Guid.NewGuid().ToString();
             _memberList.InsertOne(member);
-            //ViewBag.Mgs = "Student has been saved.";
-            return RedirectToAction("Member");
+            ViewBag.Mgs = "Member Added SuccessFully";
+            return RedirectToAction("MemberList");
         }
 
         public IActionResult EditMember(string Id)
@@ -66,7 +64,7 @@ namespace CPUTracking.Controllers
                 return View(member);
             }
             _memberList.ReplaceOne(c => c.Id == member.Id, member);
-            return RedirectToAction("Member");
+            return RedirectToAction("MemberList");
         }
 
         public ActionResult DeleteMember(string id)
@@ -74,6 +72,7 @@ namespace CPUTracking.Controllers
             var member= _memberList.Find(c => c.Id == id).FirstOrDefault();
             if (member == null)
             {
+                ViewBag.Msg = "Please provide Id";
                 return NotFound();
             }
             return View(member);
@@ -83,7 +82,7 @@ namespace CPUTracking.Controllers
         public ActionResult DeleteMember(CPUMember member)
         {
             _memberList.DeleteOne(c => c.Id == member.Id);
-            return RedirectToAction("Member");
+            return RedirectToAction("MemberList");
         }
 
     }
