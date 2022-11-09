@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Member List";
 }
+
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <h1>@ViewData["Title"]</h1>
 
 <a class="btn btn-primary" asp-action="CreateMember">Create New</a>
@@ -10,8 +13,8 @@
     <thead>
         <tr>
             @*<th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>*@
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -26,8 +29,8 @@
         {
             <tr>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>

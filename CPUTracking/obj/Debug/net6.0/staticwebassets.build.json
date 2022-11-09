@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KFD7Y5x1Fvwuwd3Ofu9680dSdsNEzBv0qtTWIF7qEwo=",
+  "Hash": "wftcd/TNHTX1RaaDuH58WdZ2hzZZVjBGtoCq8zlbo+c=",
   "Source": "CPUTracking",
   "BasePath": "_content/CPUTracking",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/obj/Debug/net6.0/scopedcss/projectbundle/CPUTracking.bundle.scp.css"
+    },
+    {
+      "Identity": "/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/wwwroot/.DS_Store",
+      "SourceId": "CPUTracking",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/wwwroot/",
+      "BasePath": "_content/CPUTracking",
+      "RelativePath": ".DS_Store",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/.DS_Store"
     },
     {
       "Identity": "/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/wwwroot/css/site.css",

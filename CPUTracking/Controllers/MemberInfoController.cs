@@ -37,7 +37,7 @@ namespace CPUTracking.Controllers
         public IActionResult CreateMember()
         {
             var sessionList = this.sessionService.GetAllSessionList();
-            return View(sessionList);
+            return View();
         }
         [HttpPost]
         public IActionResult CreateMember(CPUMember member)

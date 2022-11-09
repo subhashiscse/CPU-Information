@@ -12,6 +12,8 @@ namespace CPUTracking.Models.Create
         [Required]
         public String Id { get; set; }
         public string? Name { get; set; }
+        [Required(ErrorMessage = "Email Required")]
+        [EmailAddress(ErrorMessage = "Please Enter a Valid Email")]
         public string? Email { get; set; }
         public string? SessionId { get; set; }
         public string? Session { get; set; }
