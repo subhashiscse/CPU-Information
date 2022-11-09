@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CPUTracking.Models.Create;
+using CPUTracking.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
@@ -16,15 +17,16 @@ namespace CPUTracking.Controllers
     public class MemberInfoController : Controller
     {
         private readonly IMongoCollection<CPUMember> _memberList;
-        public MemberInfoController(IConfiguration configuration)
+        public ISessionService sessionService;
+        public MemberInfoController(IConfiguration configuration, ISessionService sessionService)
         {
             var dbClient = new MongoClient(configuration.GetConnectionString("CPUTrackingAppConnection"));
             var database = dbClient.GetDatabase("CPUTracking");
             _memberList = database.GetCollection<CPUMember>("Members");
+            this.sessionService = sessionService;
         }
         public IActionResult Index()
         {
-            //var data = _memberList.Find(FilterDefinition<CPUMember>.Empty).ToList();
             return View();
         }
         public IActionResult MemberList()
@@ -34,7 +36,8 @@ namespace CPUTracking.Controllers
         }
         public IActionResult CreateMember()
         {
-            return View();
+            var sessionList = this.sessionService.GetAllSessionList();
+            return View(sessionList);
         }
         [HttpPost]
         public IActionResult CreateMember(CPUMember member)
