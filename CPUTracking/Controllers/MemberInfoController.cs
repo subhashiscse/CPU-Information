@@ -61,7 +61,7 @@ namespace CPUTracking.Controllers
         [HttpPost]
         public ActionResult EditMember(CPUMember member)
         {
-            if (string.IsNullOrEmpty(member.Id.ToString()))
+            if (string.IsNullOrEmpty(member?.Id.ToString()))
             {
                 ViewBag.Mgs = "Please provide id";
                 return View(member);

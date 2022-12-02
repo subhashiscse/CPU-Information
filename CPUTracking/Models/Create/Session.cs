@@ -10,7 +10,7 @@ namespace CPUTracking.Models.Create
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         [Required]
-        public String Id { get; set; }
+        public String? Id { get; set; }
         public string? Name { get; set; }
     }
 }

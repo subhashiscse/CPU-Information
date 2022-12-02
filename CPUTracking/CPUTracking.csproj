@@ -16,6 +16,8 @@
     <None Remove="Models\Create\" />
     <None Remove="MongoDB.Driver" />
     <None Remove="Services\" />
+    <None Remove="Views\Login\" />
+    <None Remove="Models\Login\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
@@ -34,5 +36,9 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Login\" />
+    <Folder Include="Models\Login\" />
   </ItemGroup>
 </Project>
