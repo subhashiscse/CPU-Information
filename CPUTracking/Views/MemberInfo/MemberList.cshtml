@@ -13,14 +13,21 @@
     <thead>
         <tr>
             @*<th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>*@
+            @Html.DisplayNameFor(model => model.Id)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+
             <th>Action</th>
         </tr>
     </thead>
@@ -29,8 +36,8 @@
         {
             <tr>
                 @*<td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>*@
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -38,6 +45,13 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Session)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    <a class="btn btn-info" asp-action="EditMember" asp-route-id="@item.Id">View Details</a>
                     <a class="btn btn-primary" asp-action="EditMember" asp-route-id="@item.Id">Edit</a>
                     <a class="btn btn-danger" asp-action="DeleteMember" asp-route-id="@item.Id">Delete</a>
                 </td>
