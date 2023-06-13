@@ -15,18 +15,10 @@
             @*<th>
             @Html.DisplayNameFor(model => model.Id)
         </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Session)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Session</th>
+            <th>Clist Id</th>
 
             <th>Action</th>
         </tr>
@@ -48,10 +40,10 @@
                     @Html.DisplayFor(modelItem => item.Session)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    @Html.DisplayFor(modelItem => item.ClistId)
                 </td>
                 <td>
-                    <a class="btn btn-info" asp-action="EditMember" asp-route-id="@item.Id">View Details</a>
+                    <a class="btn btn-info" asp-controller="ContestTracker" asp-action="PersonalContestDetails">View Details</a>
                     <a class="btn btn-primary" asp-action="EditMember" asp-route-id="@item.Id">Edit</a>
                     <a class="btn btn-danger" asp-action="DeleteMember" asp-route-id="@item.Id">Delete</a>
                 </td>

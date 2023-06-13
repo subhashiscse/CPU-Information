@@ -23,6 +23,7 @@ namespace CPUTracking.Models.Create
         public string? AtCoderId { get; set; }
         public string? LightOjId { get; set; }
         public string? TophId { get; set; }
+        public string? ClistId { get; set; }
         public bool IsAdmin { get; set; }
     }
 }

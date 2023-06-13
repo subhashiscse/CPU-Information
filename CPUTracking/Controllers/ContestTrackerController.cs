@@ -34,11 +34,14 @@ namespace CPUTracking.Controllers
             _contestList = database.GetCollection<Contest>("Contests");
             _contestService = contestService;
         }
-    public IActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
-
+        public async Task<IActionResult> PersonalContestDetails()
+        {
+            return View();
+        }
         public async Task<IActionResult> ContestList(string idurl)
         {
             using (HttpClient client = new HttpClient())
@@ -147,6 +150,7 @@ namespace CPUTracking.Controllers
             }
             return 1;
         }
+
     }
 }
 
