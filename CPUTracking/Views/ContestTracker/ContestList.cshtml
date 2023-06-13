@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CPUTracking.Models.ContestDTO.ContestData>
+@{
+    ViewData["Title"] = "Contest List";
+}
+<h1>@ViewData["Title"]</h1>
+<h5>@ViewBag.Mgs</h5>
+<hr />
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Key)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Place)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalParticipant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Percentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Point)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int total_score = 0;
+        }
+        @foreach (var item in Model)
+        {
+            total_score += item.Point;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Place)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalParticipant)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Percentage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Point)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="text-secondary font-weight-bold" colspan="5">Total</td>
+            <td><span>&#61;</span></td>
+            <td class="text-dark font-weight-bold">@total_score</td>
+        </tr>
+    </tbody>
+
+</table>

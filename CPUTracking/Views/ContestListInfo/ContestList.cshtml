@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CPUTracking.Models.Create.Contest>
+@{
+    ViewData["Title"] = "All Contest List";
+}
+<h1>@ViewData["Title"]</h1>
+<h5>@ViewBag.Mgs</h5>
+<hr />
+<div class="searchBar d-flex justify-content-end">
+    <a class="btn btn-primary" asp-action="UpdateContestListData">Update Contest List</a>
+</div>
+<hr />
+<div class="searchBar d-flex justify-content-end">
+    <form asp-action="ContestList" asp-controller="ContestListInfo" class="form-inline">
+        <div class="input-group input-group-sm" style="width: 350px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Choose Start date</span>
+            </div>
+            <input type="date" name="FromDate" class="form-control" placeholder="start date" id="start_date">
+        </div>
+        <hr />
+        <input class="btn btn-info" type="submit" value="Submit">
+    </form>
+</div>
+<hr/>
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>Contest Id</th>
+            <th>Contest Name</th>
+            <th>Start Time</th>
+            <th>Duration</th>
+            <th>Total Participant</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+         {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContestStartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContestDuration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalParticipant)
+                </td>
+                <td>
+                    <form method="post" action="/ContestListInfo/UpdateContestData">
+                        <input type="hidden" name="contestId" value="@item.Id" />
+                        <button class="btn btn-info" type="submit">Update</button>
+                    </form>
+                </td>
+            </tr>
+         }
+    </tbody>
+
+</table>

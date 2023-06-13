@@ -20,15 +20,21 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @*
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Home" asp-action="Index">Create User</a>
-                        </li>
+         <li class="nav-item">
+            <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Home" asp-action="Index">Create User</a>
+        </li>
                         *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" role="button" asp-area="" asp-controller="MemberInfo" asp-action="MemberList">Member List</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Session" asp-action="SessionList">Session</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" role="button" asp-area="" asp-controller="MemberInfo" asp-action="MemberList">Member List</a>
+                            <a class="nav-link text-dark" role="button" asp-area="" asp-controller="ContestListInfo" asp-action="ContestList">Contest List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" role="button" asp-area="" asp-controller="ContestTracker" asp-action="ContestList">Contest Tracker Data</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

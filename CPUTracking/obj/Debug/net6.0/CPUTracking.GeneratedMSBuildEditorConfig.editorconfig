@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/Views/ContestListInfo/ContestList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udGVzdExpc3RJbmZvL0NvbnRlc3RMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/Views/ContestTracker/ContestList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udGVzdFRyYWNrZXIvQ29udGVzdExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/subhashismollick/Projects/CPU Personal/CPU-Information/CPUTracking/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
