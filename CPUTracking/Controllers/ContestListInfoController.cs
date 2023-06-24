@@ -25,7 +25,7 @@ namespace CPUTracking.Controllers
         }
         public async Task<ActionResult> ContestList(DateTime FromDate)
         { 
-            List<Contest> contestList = _contestList.Find(c => c.ContestStartTime >= FromDate).SortBy(c => c.CreateDate).ToList();
+            List<Contest> contestList = _contestList.Find(c => c.ContestStartTime >= FromDate).SortByDescending(c => c.ContestStartTime).ToList();
             return View(contestList);
         }
         public async Task<IActionResult> UpdateContestData(int contestId)
@@ -107,6 +107,66 @@ namespace CPUTracking.Controllers
 
             }
         }
+        public async Task<IActionResult> CodeforcesDetails(string handleName)
+        {
+            handleName = "Cloud_";
+            using (HttpClient client = new HttpClient())
+            {
+                string apiUrl = $"https://codeforces.com/api/user.rating?handle={handleName}";
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    IndividualCodeforcesContestListResponse data = JsonConvert.DeserializeObject<IndividualCodeforcesContestListResponse>(jsonResponse);
+                    List<CodeforcesContestList> codeforcesContestList = data.Result;
+                    codeforcesContestList = codeforcesContestList.OrderByDescending(item => item.RatingUpdateTimeSeconds).ToList();
+                    return View(codeforcesContestList);
+                }
+
+            }
+            return View();
+        }
+        public async Task<IActionResult> AtcoderDetails(string handleName)
+        {
+            handleName = "Cloud_";
+            using (HttpClient client = new HttpClient())
+            {
+                string apiUrl = $"https://kenkoooo.com/atcoder/atcoder-api/results?user={handleName}";
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    IndividualAtcoderContestListResponse data = JsonConvert.DeserializeObject<IndividualAtcoderContestListResponse>(jsonResponse);
+                    List<AtcoderContestList> codeforcesContestList = data.Result;
+                    //codeforcesContestList = codeforcesContestList.OrderByDescending(item => item.RatingUpdateTimeSeconds).ToList();
+                    return View(codeforcesContestList);
+                }
+
+            }
+            return View();
+        }
+        public static async Task<int> GetAtcoderTotalParticipants(string contestId)
+        {
+            string url = $"https://atcoder.jp/contests/{contestId}/standings/json";
+
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    //var contestData = await response.Content.ReadAsJsonAsync<AtcoderContestData>();
+                    int totalParticipants = 0;// contestData.TotalCount;
+                    return totalParticipants;
+                }
+            }
+
+            // Return a default value if participant count cannot be retrieved
+            return -1;
+        }
+
+        
     }
 }
 

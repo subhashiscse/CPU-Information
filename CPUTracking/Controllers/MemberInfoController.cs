@@ -87,6 +87,15 @@ namespace CPUTracking.Controllers
             _memberList.DeleteOne(c => c.Id == member.Id);
             return RedirectToAction("MemberList");
         }
+        public ActionResult MemberDetails(string Id)
+        {
+            var member = _memberList.Find(c => c.Id == Id).FirstOrDefault();
+            if (member == null)
+            {
+                return NotFound();
+            }
+            return View(member);
+        }
 
     }
 }

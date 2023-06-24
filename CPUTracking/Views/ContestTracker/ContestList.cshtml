@@ -3,7 +3,23 @@
     ViewData["Title"] = "Contest List";
 }
 <h1>@ViewData["Title"]</h1>
-<h5>@ViewBag.Mgs</h5>
+<hr />
+<div class="searchBar d-flex justify-content-end">
+    <form asp-controller="ContestTracker" asp-action="ContestList" class="form-inline">
+        <div class="input-group input-group-sm" style="width: 350px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Choose Start date</span>
+            </div>
+            <input type="date" name="FromDate" class="form-control" placeholder="start date" id="start_date">
+        </div>
+        <hr />
+        <input class="btn btn-info" type="submit" value="Submit">
+    </form>
+</div>
+<hr />
+<h5>@ViewBag.CoderName</h5>
+<hr />
+<h5>@ViewBag.StartingMessage</h5>
 <hr />
 <table class="table table-bordered table-responsive table-hover">
     <thead>

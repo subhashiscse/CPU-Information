@@ -1,5 +1,6 @@
 ﻿using CPUTracking.Models;
 using CPUTracking.Services;
+using Microsoft.Data.SqlClient;
 using NuGet.Protocol.Core.Types;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +29,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=MemberInfo}/{action=MemberList}/{id?}");
+
 
 app.Run();
 

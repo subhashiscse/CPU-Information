@@ -1,54 +1,71 @@
-﻿@model IEnumerable<CPUTracking.Models.Create.CPUMember>
+﻿@model CPUTracking.Models.Create.CPUMember
 @{
     ViewData["Title"] = "Member List";
 }
 
-
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<h1>@ViewData["Title"]</h1>
-
-<a class="btn btn-primary" asp-action="CreateMember">Create New</a>
+<h1>Member List</h1>
 <hr />
-<table class="table table-bordered table-responsive table-hover">
-    <thead>
-        <tr>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>*@
-            <th>Name</th>
-            <th>Email</th>
-            <th>Session</th>
-            <th>Clist Id</th>
+<div>
+    <a class="btn btn-primary" asp-action="MemberList">Back to List</a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditMember" method="post">
 
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Session)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClistId)
-                </td>
-                <td>
-                    <a class="btn btn-info" asp-controller="ContestTracker" asp-action="PersonalContestDetails">View Details</a>
-                    <a class="btn btn-primary" asp-action="EditMember" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-danger" asp-action="DeleteMember" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-
-</table>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="CodeforcesId" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="CodeforcesId" class="form-control" readonly />
+                    <span class="input-group-append">
+                        <a class="btn btn-primary right-align" asp-controller="ContestListInfo" asp-action="CodeforcesDetails">Show Details</a>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodechefId" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="CodechefId" class="form-control" readonly />
+                    <span class="input-group-append">
+                        <a class="btn btn-primary right-align" asp-controller="ContestListInfo" asp-action="CodeforcesDetails">Show Details</a>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="AtCoderId" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="AtCoderId" class="form-control" readonly />
+                    <span class="input-group-append">
+                        <a class="btn btn-primary right-align" asp-controller="ContestListInfo" asp-action="AtcoderDetails">Show Details</a>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="LightOjId" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="LightOjId" class="form-control" readonly />
+                    <span class="input-group-append">
+                        <a class="btn btn-primary right-align" asp-action="MemberList">Show Details</a>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClistId" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="ClistId" class="form-control" readonly />
+                    <span class="input-group-append">
+                        <a class="btn btn-primary right-align" asp-action="MemberList">Show Details</a>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

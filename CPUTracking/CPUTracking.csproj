@@ -21,6 +21,7 @@
     <None Remove="PagedList.Mvc" />
     <None Remove="PagedList" />
     <None Remove="Views\ContestListInfo\" />
+    <None Remove="Views\ClistTracking\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
@@ -34,6 +35,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
     <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Views\IndividualPerformance">
@@ -45,6 +48,7 @@
     <Folder Include="Views\Login\" />
     <Folder Include="Models\Login\" />
     <Folder Include="Views\ContestListInfo\" />
+    <Folder Include="Views\ClistTracking\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\ContestInfo\CodeforcesContestList.cshtml" />

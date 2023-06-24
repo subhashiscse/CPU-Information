@@ -22,7 +22,7 @@ namespace CPUTracking.Models.ContestDTO
     public class ContestData
     {
         public string Place { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public string Name { get; set; }
         public string Key { get; set; }
         public double Percentage { get; set; }
@@ -32,7 +32,7 @@ namespace CPUTracking.Models.ContestDTO
     public class Contests
     {
         public string Place { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public string Name { get; set; }
         public string Key { get; set; }
         //public string Kind { get; set; }
@@ -143,11 +143,11 @@ namespace CPUTracking.Models.ContestDTO
         [JsonProperty("codeforces.com")]
         public CodeforcesCom codeforcescom { get; set; }
 
-        //[JsonProperty("codechef.com")]
-        //public CodechefCom codechefcom { get; set; }
+        [JsonProperty("codechef.com")]
+        public CodechefCom codechefcom { get; set; }
 
-        //[JsonProperty("atcoder.jp")]
-        //public AtcoderJp atcoderjp { get; set; }
+        [JsonProperty("atcoder.jp")]
+        public AtcoderJp atcoderjp { get; set; }
 
         //[JsonProperty("leetcode.com")]
         //public LeetcodeCom leetcodecom { get; set; }
@@ -171,6 +171,32 @@ namespace CPUTracking.Models.ContestDTO
 
     public class StandingsRow
     {
+    }
+    public class IndividualCodeforcesContestListResponse
+    {
+        public string Status { get; set; }
+        public List<CodeforcesContestList> Result { get; set; }
+    }
+    public class CodeforcesContestList
+    {
+        public int ContestId { get; set; }
+        public string ContestName { get; set; }
+        public int Rank { get; set; }
+        public int OldRating { get; set; }
+        public int NewRating { get; set; }
+        public long RatingUpdateTimeSeconds { get; set; }
+    }
+    public class IndividualAtcoderContestListResponse
+    {
+        public List<AtcoderContestList> Result { get; set; }
+    }
+    public class AtcoderContestList
+    {
+        
+    }
+    public class AtcoderContestData
+    {
+        public int TotalCount { get; set; }
     }
 }
 

@@ -1,13 +1,17 @@
-﻿@model IEnumerable<CPUTracking.Models.Create.Contest>
+﻿@model IEnumerable<CPUTracking.Models.ContestDTO.CodeforcesContestList>
 @{
     ViewData["Title"] = "All Contest List";
 }
 <h1>@ViewData["Title"]</h1>
-<h5>@ViewBag.Mgs</h5>
+<body>
+    <h1>@ViewBag.Message</h1>
+</body>
 <hr />
 <div class="searchBar d-flex justify-content-end">
     <a class="btn btn-primary" asp-action="UpdateContestListData">Update Contest List</a>
 </div>
+<hr />
+<h1>@ViewBag.Message</h1>
 <hr />
 <div class="searchBar d-flex justify-content-end">
     <form asp-action="ContestList" asp-controller="ContestListInfo" class="form-inline">
@@ -21,45 +25,38 @@
         <input class="btn btn-info" type="submit" value="Submit">
     </form>
 </div>
-<hr/>
+<hr />
 <table class="table table-bordered table-responsive table-hover">
     <thead>
         <tr>
             <th>Contest Id</th>
             <th>Contest Name</th>
-            <th>Start Time</th>
-            <th>Duration</th>
-            <th>Total Participant</th>
-            <th>Action</th>
+            <th>Rank</th>
+            <th>Old Rating</th>
+            <th>New Rating</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
-         {
+        {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => item.ContestId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.ContestName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContestStartTime)
+                    @Html.DisplayFor(modelItem => item.Rank)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContestDuration)
+                    @Html.DisplayFor(modelItem => item.OldRating)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TotalParticipant)
-                </td>
-                <td>
-                    <form method="post" action="/ContestListInfo/UpdateContestData">
-                        <input type="hidden" name="contestId" value="@item.Id" />
-                        <button class="btn btn-info" type="submit">Update</button>
-                    </form>
+                    @Html.DisplayFor(modelItem => item.NewRating)
                 </td>
             </tr>
-         }
+        }
     </tbody>
 
 </table>
