@@ -2,6 +2,7 @@
 using CPUTracking.Services;
 using Microsoft.Data.SqlClient;
 using NuGet.Protocol.Core.Types;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
@@ -14,6 +15,8 @@ builder.Services.Configure<DatabaseSettings>(
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<IContestService, ContestService>();
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

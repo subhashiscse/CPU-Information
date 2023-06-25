@@ -6,15 +6,35 @@
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <h1>@ViewData["Title"]</h1>
+<div class="searchBar d-flex justify-content-start">
+    <a class="btn btn-primary" asp-action="CreateMember">Create New</a>
+</div>
+<div class="searchBar d-flex justify-content-end">
+    @*<form asp-action="UploadFile" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Select Excel File:</label>
+                <input type="file" name="file" id="file" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>*@
+    @using (Html.BeginForm("UploadExcel", "MemberInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label for="file">Select Excel File:</label>
+            <input type="file" name="file" id="file" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+     }
+</div>
 
-<a class="btn btn-primary" asp-action="CreateMember">Create New</a>
+<hr />
 <hr />
 <table class="table table-bordered table-responsive table-hover">
     <thead>
         <tr>
             @*<th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>*@
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>*@
             <th>Name</th>
             <th>Email</th>
             <th>Session</th>
@@ -28,8 +48,8 @@
         {
             <tr>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
