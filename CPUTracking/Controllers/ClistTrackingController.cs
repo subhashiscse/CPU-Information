@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using CPUTracking.Models.ContestDTO;
 using CPUTracking.Models.Create;
 using CPUTracking.Services;
 using HtmlAgilityPack;
@@ -13,14 +14,14 @@ namespace CPUTracking.Controllers
     {
         private readonly IMongoCollection<ClistRank> _contestList;
         private readonly IMongoCollection<CPUMember> _memberList;
-        public IContestService contestService;
+        public IContestService _contestService;
         public ClistTrackingController(IConfiguration configuration, IContestService contestService)
         {
             var dbClient = new MongoClient(configuration.GetConnectionString("CPUTrackingAppConnection"));
             var database = dbClient.GetDatabase("CPUTracking");
             _contestList = database.GetCollection<ClistRank>("ClistRanks");
             _memberList = database.GetCollection<CPUMember>("Members");
-            this.contestService = contestService;
+            _contestService = contestService;
         }
         public IActionResult Index()
         {
@@ -65,9 +66,9 @@ namespace CPUTracking.Controllers
             HtmlWeb web = new HtmlWeb();
             if (HandleName == null)
             {
-                HandleName = "Mohidul";
+                HandleName = "Cloud_";
             }
-            string profileLink = "https://clist.by/coder/"+ HandleName + "/?contest_page=1";
+            string profileLink = "https://clist.by/coder/"+ HandleName + "/?contest_page="+PageNo;
             HtmlDocument doc = web.Load(profileLink);
             var table = doc.DocumentNode.SelectSingleNode("//*[@id=\"contests\"]");
 
@@ -145,8 +146,8 @@ namespace CPUTracking.Controllers
                                     currentContest.Rank = int.Parse(rank);
                                     currentContest.TotalParticipant = int.Parse(total);
                                     currentContest.Percentage = percentage;
-                                    currentContest.Point = CalculatePointUsingScore(percentage);
-                                    currentContest.ContestPlatform = checkContestPlatformName(contestLink);
+                                    currentContest.Point = _contestService.CalculatePointUsingScore(percentage);
+                                    currentContest.ContestPlatform = _contestService.checkContestPlatformName(contestLink);
                                     currentContest.UserName = HandleName;
                                     _contestList.InsertOne(currentContest);
                                 }
@@ -159,46 +160,13 @@ namespace CPUTracking.Controllers
             ViewBag.Msg = "The contest data for " + HandleName+ " Updated Successfully";
             ViewBag.CoderName = "Id Name: " + HandleName;
             return;
-            //return RedirectToAction("ContestList");
         }
-        public string checkContestPlatformName(string inputString)
+        public async Task<ActionResult> FinalResult(DateTime FromDate)
         {
-            if (inputString.Contains("codeforces"))
-            {
-                return "codeforces";
-            }
-            else if (inputString.Contains("codechef"))
-            {
-                return "codechef";
-            }
-            else if (inputString.Contains("atcoder"))
-            {
-                return "atcoder";
-            }
-            else
-            {
-                return "other";
-            }
-        }
-        public int CalculatePointUsingScore(int percentage)
-        {
-            if (percentage <= 20)
-            {
-                return 5;
-            }
-            else if (percentage <= 40)
-            {
-                return 4;
-            }
-            else if (percentage <= 60)
-            {
-                return 3;
-            }
-            else if (percentage <= 80)
-            {
-                return 2;
-            }
-            return 1;
+            
+            List<ContestScore> ContestScoreList = _contestService.GenerateScoreForAllUser(FromDate);
+            
+            return View(ContestScoreList);
         }
     }
     

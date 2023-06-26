@@ -41,7 +41,7 @@ namespace CPUTracking.Controllers
         }
         public IActionResult MemberList()
         {
-            var data = _memberList.Find(FilterDefinition<CPUMember>.Empty).SortBy(c => c.CreateDate).ToList();
+            var data = _memberList.Find(FilterDefinition<CPUMember>.Empty).SortBy(c => c.Session).ToList();
             return View(data);
         }
         public IActionResult CreateMember()
@@ -120,13 +120,13 @@ namespace CPUTracking.Controllers
                         // Get the total number of rows and columns
                         int rowCount = worksheet.Dimension.Rows;
                         int columnCount = worksheet.Dimension.Columns;
-                        List<string> headers = new List<string>();
-                        for(int col = 1; col <= columnCount; col++)
-                        {
-                            var cellValue = worksheet.Cells[1, col].Value;
-                            headers.Add(cellValue.ToString());
-                        }
-                        Console.WriteLine(headers);
+                        //List<string> headers = new List<string>();
+                        //for(int col = 1; col <= columnCount; col++)
+                        //{
+                        //    var cellValue = worksheet.Cells[1, col].Value;
+                        //    headers.Add(cellValue.ToString());
+                        //}
+                        //Console.WriteLine(headers);
                         for (int row = 2; row <= rowCount; row++)
                         {
                             CPUMember member = new CPUMember();
@@ -134,7 +134,8 @@ namespace CPUTracking.Controllers
                             member.Name = (worksheet.Cells[row, 1].Value).ToString();
                             member.Email = (worksheet.Cells[row, 2].Value).ToString();
                             member.Session = (worksheet.Cells[row, 3].Value).ToString();
-                            member.ClistId = (worksheet.Cells[row, 4].Value).ToString();
+                            member.PhoneNumber = (worksheet.Cells[row, 4].Value).ToString();
+                            member.ClistId = (worksheet.Cells[row, 5].Value).ToString();
                             _memberList.InsertOne(member);
                             Console.WriteLine(member);
                         }

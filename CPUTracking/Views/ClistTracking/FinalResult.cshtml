@@ -1,26 +1,9 @@
-﻿@model IEnumerable<CPUTracking.Models.Create.ClistRank>
+﻿@model IEnumerable<CPUTracking.Models.ContestDTO.ContestScore>
 @{
-    ViewData["Title"] = "All Contest List";
+    ViewData["Title"] = "Final Score List";
 }
 <h1>@ViewData["Title"]</h1>
 <hr />
-<div class="searchBar d-flex justify-content-end">
-    <a class="btn btn-primary" asp-action="UpdateContestDataForAllUser">Update Data</a>
-</div>
-<hr />
-<div class="searchBar d-flex justify-content-start">
-    <form asp-controller="ClistTracking" asp-action="GenerateContestDataForAllUser" class="form-inline">
-        <div class="input-group input-group-sm" style="width: 350px;">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="">Choose Start date</span>
-            </div>
-            <input type="date" name="FromDate" class="form-control" placeholder="Start date" id="start_date">
-        </div>
-
-        <hr />
-        <input class="btn btn-info" type="submit" value="Generate Score">
-    </form>
-</div>
 <div class="searchBar d-flex justify-content-end">
     <form asp-controller="ClistTracking" asp-action="ContestList" class="form-inline">
         <div class="input-group input-group-sm" style="width: 350px;">
@@ -41,66 +24,43 @@
     </form>
 </div>
 <hr />
-@if (!string.IsNullOrEmpty(ViewBag.Msg))
-{
-    <div class="alert alert-success">@ViewBag.Msg</div>
-}
-<hr />
-<h5>@ViewBag.CoderName</h5>
-<hr />
-<h5>@ViewBag.StartingMessage</h5>
-<hr />
 <table class="table table-bordered table-responsive table-hover">
     <thead>
         <tr>
             <th>Serial</th>
-            <th>Contest Id</th>
-            <th>Contest Name</th>
-            <th>Contest Date</th>
-            <th>Rank</th>
-            <th>Total Participant</th>
-            <th>Percentage</th>
-            <th>Point</th>
+            <th>Name</th>
+            <th>Handle Name</th>
+            <th>Session</th>
+            <th>NumberOfContest</th>
+            <th>TotalScore</th>
         </tr>
     </thead>
     <tbody>
         @{
-            int total_score = 0,serialNo = 0;
+            int serialNo = 0;
         }
         @foreach (var item in Model)
         {
-            total_score += item.Point;
             serialNo++;
             <tr>
                 <td>@serialNo</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContestId)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContestName)
+                    @Html.DisplayFor(modelItem => item.HandleName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContestDate)
+                    @Html.DisplayFor(modelItem => item.Session)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Rank)
+                    @Html.DisplayFor(modelItem => item.NumberOfContest)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TotalParticipant)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Percentage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Point)
+                    @Html.DisplayFor(modelItem => item.TotalScore)
                 </td>
             </tr>
         }
-    <tr>
-        <td class="text-secondary font-weight-bold" colspan="6">Total</td>
-        <td><span>&#61;</span></td>
-        <td class="text-dark font-weight-bold">@total_score</td>
-    </tr>
     </tbody>
 
 </table>
