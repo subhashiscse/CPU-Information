@@ -163,10 +163,24 @@ namespace CPUTracking.Controllers
         }
         public async Task<ActionResult> FinalResult(DateTime FromDate)
         {
-            
+
             List<ContestScore> ContestScoreList = _contestService.GenerateScoreForAllUser(FromDate);
-            
             return View(ContestScoreList);
+        }
+        public ActionResult DownloadTableData(DateTime FromDate)
+        {
+            List<ContestScore> ContestScoreList = _contestService.GenerateScoreForAllUser(FromDate);
+            string csvContent = GenerateCSVContent(ContestScoreList);
+            return File(new System.Text.UTF8Encoding().GetBytes(csvContent), "text/csv", "Contest Performance.csv");
+        }
+        private string GenerateCSVContent(List<ContestScore> data)
+        {
+            string csvContent = "Name,HandleName,Session,NumberOfContest,TotalScore\n";
+            foreach (var item in data)
+            {
+                csvContent += $"{item.Name},{item.HandleName},{item.Session},{item.NumberOfContest},{item.TotalScore}\n";
+            }
+            return csvContent;
         }
     }
     

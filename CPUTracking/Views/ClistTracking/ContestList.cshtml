@@ -18,7 +18,25 @@
         </div>
 
         <hr />
-        <input class="btn btn-info" type="submit" value="Generate Score">
+
+        <span>
+            <input class="btn btn-info" type="submit" value="Generate Score">
+        </span>
+    </form>
+    <form asp-controller="ClistTracking" asp-action="DownloadTableData" class="form-inline">
+        <div class="input-group input-group-sm" style="width: 350px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Choose Start date</span>
+            </div>
+            <input type="date" name="FromDate" class="form-control" placeholder="Start date" id="start_date">
+        </div>
+
+        <hr />
+
+
+        <span>
+            <input class="btn btn-info" type="submit" value="Download Score">
+        </span>
     </form>
 </div>
 <div class="searchBar d-flex justify-content-end">
