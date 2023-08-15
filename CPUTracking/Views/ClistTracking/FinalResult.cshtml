@@ -31,7 +31,10 @@
             <th>Name</th>
             <th>Handle Name</th>
             <th>Session</th>
-            <th>NumberOfContest</th>
+            @*<th>NumberOfContest</th>*@
+            <th>
+                @Html.ActionLink("NumberOfContest", "Index", new { sortOrder = ViewBag.DateSortParm })
+            </th>
             <th>TotalScore</th>
         </tr>
     </thead>

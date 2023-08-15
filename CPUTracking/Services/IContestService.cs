@@ -10,6 +10,7 @@ namespace CPUTracking.Services
         List<ContestScore> GenerateScoreForAllUser(DateTime FromDate);
         int CalculatePointUsingScore(int percentage);
         string checkContestPlatformName(string inputString);
+        Task SyncContestDataForAParticularUser(string handleName);
     }
 }
 

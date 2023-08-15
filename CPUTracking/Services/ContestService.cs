@@ -2,7 +2,10 @@
 using System.Configuration;
 using CPUTracking.Models.ContestDTO;
 using CPUTracking.Models.Create;
+using HtmlAgilityPack;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Driver;
+using static MongoDB.Bson.Serialization.Serializers.SerializerHelper;
 
 namespace CPUTracking.Services
 {
@@ -94,6 +97,114 @@ namespace CPUTracking.Services
             else
             {
                 return "other";
+            }
+        }
+
+        public async Task SyncContestDataForAParticularUser(string handleName)
+        {
+            List<int> totalPage = new List<int>() { 1, 2 };
+            string clistHandleName = handleName;
+            foreach (int pageno in totalPage)
+            {
+                UpdateContestListData(pageno, clistHandleName);
+            }
+        }
+        public void UpdateContestListData(int PageNo, string HandleName)
+        {
+            HtmlWeb web = new HtmlWeb();
+            if (HandleName == null)
+            {
+                HandleName = "Cloud_";
+            }
+            string profileLink = "https://clist.by/coder/" + HandleName + "/?contest_page=" + PageNo;
+            HtmlDocument doc = web.Load(profileLink);
+            var table = doc.DocumentNode.SelectSingleNode("//*[@id=\"contests\"]");
+
+            if (table != null)
+            {
+                var rows = table.SelectNodes(".//tr");
+                if (rows != null)
+                {
+                    var index = 0;
+                    foreach (var row in rows)
+                    {
+                        if (row != null && index > 0)
+                        {
+                            var rankProgressDiv = row.SelectSingleNode(".//div[contains(@class, 'rank-progress')]");
+
+                            if (rankProgressDiv != null)
+                            {
+
+                                HtmlNode contestLinktd = row.SelectSingleNode("td[8]");
+                                HtmlNode dateTd = row.SelectSingleNode("td[6]");
+
+                                HtmlNode contestLinkHrefLinkTag = contestLinktd.SelectSingleNode("a[1]");
+                                var html = rankProgressDiv.OuterHtml;
+                                var data = html.Split("<br>", StringSplitOptions.RemoveEmptyEntries);
+                                string rank = "";
+                                string total = "";
+                                string rowHtml = row.OuterHtml;
+                                HtmlDocument rowDoc = new HtmlDocument();
+                                rowDoc.LoadHtml(rowHtml);
+                                HtmlNode trNode = rowDoc.DocumentNode.SelectSingleNode("//tr[@class='contest']");
+                                string contestId = trNode.GetAttributeValue("id", "");
+                                var result = _clistContestList.Find(c => c.ContestId == contestId && c.UserName == HandleName).FirstOrDefault();
+                                if (result == null)
+                                {
+                                    foreach (string item in data)
+                                    {
+                                        if (item.Contains("Rank:"))
+                                        {
+                                            rank = item.Replace("Rank:", "").Trim();
+                                        }
+                                        else if (item.Contains("Total:"))
+                                        {
+                                            var totalDiv = item.Split("\"", StringSplitOptions.RemoveEmptyEntries);
+                                            total = totalDiv[0].Replace("Total:", "").Trim();
+                                        }
+                                    }
+                                    string contestDate = dateTd.InnerText;
+                                    var contestName = contestLinkHrefLinkTag.InnerText;
+                                    string contestLink = contestLinkHrefLinkTag.GetAttributeValue("href", "");
+                                    bool containsSubstring = contestDate.Contains("Sept");
+                                    DateTime currentContestDate;
+                                    if (containsSubstring)
+                                    {
+                                        contestDate = contestDate.Replace("Sept.", "Sep.");
+                                        currentContestDate = DateTime.Parse(contestDate);
+                                    }
+                                    else if (contestDate == "today")
+                                    {
+                                        currentContestDate = DateTime.Today;
+                                    }
+                                    else if (contestDate == "yesterday")
+                                    {
+                                        currentContestDate = DateTime.Today.AddDays(-1);
+                                    }
+                                    else
+                                    {
+                                        currentContestDate = DateTime.Parse(contestDate);
+                                    }
+                                    int percentage = int.Parse(rank) * 100 / int.Parse(total);
+                                    ClistRank currentContest = new ClistRank();
+                                    currentContest.Id = Guid.NewGuid().ToString();
+                                    currentContest.ContestId = contestId;
+                                    currentContest.ContestName = contestName;
+                                    currentContest.ContestLink = contestLink;
+                                    currentContest.ContestDate = currentContestDate;
+                                    currentContest.Rank = int.Parse(rank);
+                                    currentContest.TotalParticipant = int.Parse(total);
+                                    currentContest.Percentage = percentage;
+                                    currentContest.Point = CalculatePointUsingScore(percentage);
+                                    currentContest.ContestPlatform = checkContestPlatformName(contestLink);
+                                    currentContest.UserName = HandleName;
+                                    _clistContestList.InsertOne(currentContest);
+                                }
+                            }
+                        }
+                        index++;
+                    }
+                }
             }
         }
     }

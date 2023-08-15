@@ -28,12 +28,16 @@ namespace CPUTracking.Controllers
     {
         private readonly IMongoCollection<CPUMember> _memberList;
         public ISessionService sessionService;
-        public MemberInfoController(IConfiguration configuration, ISessionService sessionService)
+        public IContestService _contestService;
+        public MemberInfoController(IConfiguration configuration,
+            ISessionService sessionService,
+            IContestService contestService)
         {
             var dbClient = new MongoClient(configuration.GetConnectionString("CPUTrackingAppConnection"));
             var database = dbClient.GetDatabase("CPUTracking");
             _memberList = database.GetCollection<CPUMember>("Members");
             this.sessionService = sessionService;
+            this._contestService = contestService;
         }
         public IActionResult Index()
         {
@@ -105,6 +109,12 @@ namespace CPUTracking.Controllers
                 return NotFound();
             }
             return View(member);
+        }
+        public ActionResult SyncContestData(string Id)
+        {
+            var member = _memberList.Find(c => c.Id == Id).FirstOrDefault();
+            this._contestService.SyncContestDataForAParticularUser(member.ClistId);
+            return RedirectToAction("MemberList");
         }
         [HttpPost]
         public ActionResult UploadExcel(IFormFile file)
