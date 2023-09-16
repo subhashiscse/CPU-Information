@@ -99,7 +99,6 @@ namespace CPUTracking.Services
                 return "other";
             }
         }
-
         public async Task SyncContestDataForAParticularUser(string handleName)
         {
             List<int> totalPage = new List<int>() { 1, 2 };
