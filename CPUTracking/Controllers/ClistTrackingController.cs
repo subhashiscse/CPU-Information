@@ -99,57 +99,61 @@ namespace CPUTracking.Controllers
                                 HtmlDocument rowDoc = new HtmlDocument();
                                 rowDoc.LoadHtml(rowHtml);
                                 HtmlNode trNode = rowDoc.DocumentNode.SelectSingleNode("//tr[@class='contest']");
-                                string contestId = trNode.GetAttributeValue("id", "");
-                                var result = _contestList.Find(c => c.ContestId == contestId && c.UserName==HandleName).FirstOrDefault();
-                                if (result == null)
+                                if (trNode != null)
                                 {
-                                    foreach (string item in data)
+                                    string contestId = trNode.GetAttributeValue("id", "");
+                                    var result = _contestList.Find(c => c.ContestId == contestId && c.UserName == HandleName).FirstOrDefault();
+                                    if (result == null)
                                     {
-                                        if (item.Contains("Rank:"))
+                                        foreach (string item in data)
                                         {
-                                            rank = item.Replace("Rank:", "").Trim();
+                                            if (item.Contains("Rank:"))
+                                            {
+                                                rank = item.Replace("Rank:", "").Trim();
+                                            }
+                                            else if (item.Contains("Total:"))
+                                            {
+                                                var totalDiv = item.Split("\"", StringSplitOptions.RemoveEmptyEntries);
+                                                total = totalDiv[0].Replace("Total:", "").Trim();
+                                            }
                                         }
-                                        else if (item.Contains("Total:"))
+                                        string contestDate = dateTd.InnerText;
+                                        var contestName = contestLinkHrefLinkTag.InnerText;
+                                        string contestLink = contestLinkHrefLinkTag.GetAttributeValue("href", "");
+                                        bool containsSubstring = contestDate.Contains("Sept");
+                                        DateTime currentContestDate;
+                                        if (containsSubstring)
                                         {
-                                            var totalDiv = item.Split("\"", StringSplitOptions.RemoveEmptyEntries);
-                                            total = totalDiv[0].Replace("Total:", "").Trim();
+                                            contestDate = contestDate.Replace("Sept.", "Sep.");
+                                            currentContestDate = DateTime.Parse(contestDate);
                                         }
+                                        else if (contestDate == "today")
+                                        {
+                                            currentContestDate = DateTime.Today;
+                                        }
+                                        else if (contestDate == "yesterday")
+                                        {
+                                            currentContestDate = DateTime.Today.AddDays(-1);
+                                        }
+                                        else
+                                        {
+                                            currentContestDate = DateTime.Parse(contestDate);
+                                        }
+                                        int percentage = int.Parse(rank) * 100 / int.Parse(total);
+                                        ClistRank currentContest = new ClistRank();
+                                        currentContest.Id = Guid.NewGuid().ToString();
+                                        currentContest.ContestId = contestId;
+                                        currentContest.ContestName = contestName;
+                                        currentContest.ContestLink = contestLink;
+                                        currentContest.ContestDate = currentContestDate;
+                                        currentContest.Rank = int.Parse(rank);
+                                        currentContest.TotalParticipant = int.Parse(total);
+                                        currentContest.Percentage = percentage;
+                                        currentContest.Point = _contestService.CalculatePointUsingScore(percentage);
+                                        currentContest.ContestPlatform = _contestService.checkContestPlatformName(contestLink);
+                                        currentContest.UserName = HandleName;
+                                        _contestList.InsertOne(currentContest);
                                     }
-                                    string contestDate = dateTd.InnerText;
-                                    var contestName = contestLinkHrefLinkTag.InnerText;
-                                    string contestLink = contestLinkHrefLinkTag.GetAttributeValue("href", "");
-                                    bool containsSubstring = contestDate.Contains("Sept");
-                                    DateTime currentContestDate;
-                                    if (containsSubstring)
-                                    {
-                                        contestDate = contestDate.Replace("Sept.", "Sep.");
-                                        currentContestDate = DateTime.Parse(contestDate);
-                                    }
-                                    else if (contestDate == "today")
-                                    {
-                                        currentContestDate = DateTime.Today;
-                                    }
-                                    else if (contestDate == "yesterday")
-                                    {
-                                        currentContestDate = DateTime.Today.AddDays(-1);
-                                    }
-                                    else {
-                                        currentContestDate = DateTime.Parse(contestDate);
-                                    }
-                                    int percentage = int.Parse(rank)*100 / int.Parse(total);
-                                    ClistRank currentContest = new ClistRank();
-                                    currentContest.Id = Guid.NewGuid().ToString();
-                                    currentContest.ContestId = contestId;
-                                    currentContest.ContestName = contestName;
-                                    currentContest.ContestLink = contestLink;
-                                    currentContest.ContestDate = currentContestDate;
-                                    currentContest.Rank = int.Parse(rank);
-                                    currentContest.TotalParticipant = int.Parse(total);
-                                    currentContest.Percentage = percentage;
-                                    currentContest.Point = _contestService.CalculatePointUsingScore(percentage);
-                                    currentContest.ContestPlatform = _contestService.checkContestPlatformName(contestLink);
-                                    currentContest.UserName = HandleName;
-                                    _contestList.InsertOne(currentContest);
                                 }
                             }
                         }

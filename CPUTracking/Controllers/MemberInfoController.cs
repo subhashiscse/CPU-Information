@@ -116,6 +116,7 @@ namespace CPUTracking.Controllers
             this._contestService.SyncContestDataForAParticularUser(member.ClistId);
             return RedirectToAction("MemberList");
         }
+        //Id Name Email Session PhoneNumber ClistId
         [HttpPost]
         public ActionResult UploadExcel(IFormFile file)
         {
