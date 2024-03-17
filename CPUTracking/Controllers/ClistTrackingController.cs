@@ -86,12 +86,18 @@ namespace CPUTracking.Controllers
 
                             if (rankProgressDiv != null)
                             {
+                                HtmlNode contestPlatformtd = row.SelectSingleNode("td[7]");
+                                var html = contestPlatformtd.OuterHtml;
+                                HtmlDocument doc1 = new HtmlDocument();
+                                doc1.LoadHtml(html);
+                                HtmlNode linkNode = doc1.DocumentNode.SelectSingleNode("//a");
+                                string contestPlatformLink = linkNode.GetAttributeValue("title", "");
 
                                 HtmlNode contestLinktd = row.SelectSingleNode("td[8]");
                                 HtmlNode dateTd = row.SelectSingleNode("td[6]");
 
                                 HtmlNode contestLinkHrefLinkTag = contestLinktd.SelectSingleNode("a[1]");
-                                var html = rankProgressDiv.OuterHtml;
+                                html = rankProgressDiv.OuterHtml;
                                 var data = html.Split("<br>", StringSplitOptions.RemoveEmptyEntries);
                                 string rank = "";
                                 string total = "";
@@ -150,9 +156,12 @@ namespace CPUTracking.Controllers
                                         currentContest.TotalParticipant = int.Parse(total);
                                         currentContest.Percentage = percentage;
                                         currentContest.Point = _contestService.CalculatePointUsingScore(percentage);
-                                        currentContest.ContestPlatform = _contestService.checkContestPlatformName(contestLink);
-                                        currentContest.UserName = HandleName;
-                                        _contestList.InsertOne(currentContest);
+                                        currentContest.ContestPlatform = _contestService.checkContestPlatformName(contestPlatformLink);
+                                        if (currentContest.ContestPlatform != "other")
+                                        {
+                                            currentContest.UserName = HandleName;
+                                            _contestList.InsertOne(currentContest);
+                                        }
                                     }
                                 }
                             }

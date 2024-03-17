@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/subhashismollick/Projects/CPU-Personal/CPU-Information/CPUTracking/CPUTracking.csproj": {}
+    "/Users/subhashismollick/Projects/CPU_Pesonal_Project/CPUTracking/CPUTracking.csproj": {}
   },
   "projects": {
-    "/Users/subhashismollick/Projects/CPU-Personal/CPU-Information/CPUTracking/CPUTracking.csproj": {
+    "/Users/subhashismollick/Projects/CPU_Pesonal_Project/CPUTracking/CPUTracking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/subhashismollick/Projects/CPU-Personal/CPU-Information/CPUTracking/CPUTracking.csproj",
+        "projectUniqueName": "/Users/subhashismollick/Projects/CPU_Pesonal_Project/CPUTracking/CPUTracking.csproj",
         "projectName": "CPUTracking",
-        "projectPath": "/Users/subhashismollick/Projects/CPU-Personal/CPU-Information/CPUTracking/CPUTracking.csproj",
+        "projectPath": "/Users/subhashismollick/Projects/CPU_Pesonal_Project/CPUTracking/CPUTracking.csproj",
         "packagesPath": "/Users/subhashismollick/.nuget/packages/",
-        "outputPath": "/Users/subhashismollick/Projects/CPU-Personal/CPU-Information/CPUTracking/obj/",
+        "outputPath": "/Users/subhashismollick/Projects/CPU_Pesonal_Project/CPUTracking/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/subhashismollick/.nuget/NuGet/NuGet.Config"
