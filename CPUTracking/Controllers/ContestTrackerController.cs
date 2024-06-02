@@ -48,7 +48,7 @@ namespace CPUTracking.Controllers
             List<Contest> contestList = _contestList.Find(c => c.ContestStartTime >= FromDate).SortBy(c => c.CreateDate).ToList();
             return View(contestList);
         }
-        public async Task<IActionResult> ContestList([FromRoute] string id, DateTime FromDate)
+        public async Task<IActionResult> ContestList([FromRoute] string id, DateTime FromDate, DateTime ToDate)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -64,9 +64,9 @@ namespace CPUTracking.Controllers
                     string json = await response.Content.ReadAsStringAsync();
                     //Console.Write(json);
                     Root reponse = JsonConvert.DeserializeObject<Root>(json);
-                    List<ContestData> codeforcesContestList = await prepareCodeforcesDataAsync(reponse.data, FromDate);
+                    List<ContestData> codeforcesContestList = await prepareCodeforcesDataAsync(reponse.data, FromDate, ToDate);
                     //List<ContestData> codechefContestList = await prepareCodechefDataAsync(reponse.data, FromDate);
-                    List<ContestData> atcoderContestList = await prepareAtcoderDataAsync(reponse.data, FromDate);
+                    List<ContestData> atcoderContestList = await prepareAtcoderDataAsync(reponse.data, FromDate, ToDate);
                     List<ContestData> contestList = new List<ContestData>();
                     contestList = contestList.Concat(codeforcesContestList).ToList();
                     //contestList = contestList.Concat(codechefContestList).ToList();
@@ -79,7 +79,7 @@ namespace CPUTracking.Controllers
             }
             return View();
         }
-        public async Task<List<ContestData>> prepareCodeforcesDataAsync(Data clistData,DateTime FromDate)
+        public async Task<List<ContestData>> prepareCodeforcesDataAsync(Data clistData,DateTime FromDate, DateTime ToDate)
         {
             Resources resourcesData = clistData.resources;
             List<ContestData> codeforceContestFinalData = new List<ContestData>();
@@ -126,7 +126,7 @@ namespace CPUTracking.Controllers
 
         }
 
-        public async Task<List<ContestData>> prepareCodechefDataAsync(Data clistData, DateTime FromDate)
+        public async Task<List<ContestData>> prepareCodechefDataAsync(Data clistData, DateTime FromDate, DateTime ToDate)
         {
             Resources resourcesData = clistData.resources;
             List<ContestData> codechefContestFinalData = new List<ContestData>();
@@ -173,7 +173,7 @@ namespace CPUTracking.Controllers
 
         }
 
-        public async Task<List<ContestData>> prepareAtcoderDataAsync(Data clistData, DateTime FromDate)
+        public async Task<List<ContestData>> prepareAtcoderDataAsync(Data clistData, DateTime FromDate, DateTime ToDate)
         {
             Resources resourcesData = clistData.resources;
             List<ContestData> atcoderContestFinalData = new List<ContestData>();

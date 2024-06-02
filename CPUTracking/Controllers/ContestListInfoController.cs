@@ -23,9 +23,9 @@ namespace CPUTracking.Controllers
             _contestList = database.GetCollection<Contest>("Contests");
             this.contestService = contestService;
         }
-        public async Task<ActionResult> ContestList(DateTime FromDate)
+        public async Task<ActionResult> ContestList(DateTime FromDate, DateTime ToDate)
         { 
-            List<Contest> contestList = _contestList.Find(c => c.ContestStartTime >= FromDate).SortByDescending(c => c.ContestStartTime).ToList();
+            List<Contest> contestList = _contestList.Find(c => c.ContestStartTime >= FromDate && c.ContestStartTime <=ToDate).SortByDescending(c => c.ContestStartTime).ToList();
             return View(contestList);
         }
         public async Task<IActionResult> UpdateContestData(int contestId)

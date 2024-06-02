@@ -27,27 +27,27 @@ namespace CPUTracking.Controllers
         {
             return View();
         }
-        public async Task<ActionResult> ContestList(string HandleName, DateTime FromDate)
+        public async Task<ActionResult> ContestList(string HandleName, DateTime FromDate, DateTime ToDate)
         {
             if (FromDate == DateTime.MinValue)
             {
                 FromDate = DateTime.Today.AddMonths(-1);
             }
-            List<ClistRank> contestList = GetContestList(HandleName, FromDate);
+            List<ClistRank> contestList = GetContestList(HandleName, FromDate, ToDate);
             ViewBag.StartingMessage = "Contest list from " + FromDate.ToString("dd-MM-yyyy") + " to " + DateTime.Now.ToString("dd-MM-yyyy");
             ViewBag.CoderName = "Id Name: " + HandleName;
             return View(contestList);
         }
-        public List<ClistRank> GetContestList(string HandleName, DateTime FromDate)
+        public List<ClistRank> GetContestList(string HandleName, DateTime FromDate, DateTime ToDate)
         {
             if (FromDate == DateTime.MinValue)
             {
                 FromDate = DateTime.Today.AddMonths(-1);
             }
-            List<ClistRank> contestList = _contestList.Find(c => c.ContestDate >= FromDate && c.UserName == HandleName).SortByDescending(c => c.ContestDate).ToList();
+            List<ClistRank> contestList = _contestList.Find(c => c.ContestDate >= FromDate && c.ContestDate<=ToDate && c.UserName == HandleName).SortByDescending(c => c.ContestDate).ToList();
             return contestList;
         }
-        public async Task<ActionResult> UpdateContestDataForAllUser()
+        public async Task<ActionResult> UpdateContestDataForAllUser(DateTime FromDate)
         {
             var memberList = _memberList.Find(FilterDefinition<CPUMember>.Empty).SortBy(c => c.CreateDate).ToList();
             foreach(var member in memberList)
@@ -56,12 +56,12 @@ namespace CPUTracking.Controllers
                 string clistHandleName = member.ClistId;
                 foreach(int pageno in totalPage)
                 {
-                    UpdateContestListData(pageno, clistHandleName);
+                    UpdateContestListData(pageno, clistHandleName, FromDate);
                 }
             }
             return RedirectToAction("ContestList");
         }
-        public async void UpdateContestListData(int PageNo,string HandleName)
+        public async void UpdateContestListData(int PageNo,string HandleName, DateTime FromDate)
         {
             HtmlWeb web = new HtmlWeb();
             if (HandleName == null)
@@ -145,23 +145,32 @@ namespace CPUTracking.Controllers
                                         {
                                             currentContestDate = DateTime.Parse(contestDate);
                                         }
-                                        int percentage = int.Parse(rank) * 100 / int.Parse(total);
-                                        ClistRank currentContest = new ClistRank();
-                                        currentContest.Id = Guid.NewGuid().ToString();
-                                        currentContest.ContestId = contestId;
-                                        currentContest.ContestName = contestName;
-                                        currentContest.ContestLink = contestLink;
-                                        currentContest.ContestDate = currentContestDate;
-                                        currentContest.Rank = int.Parse(rank);
-                                        currentContest.TotalParticipant = int.Parse(total);
-                                        currentContest.Percentage = percentage;
-                                        currentContest.Point = _contestService.CalculatePointUsingScore(percentage);
-                                        currentContest.ContestPlatform = _contestService.checkContestPlatformName(contestPlatformLink);
-                                        if (currentContest.ContestPlatform != "other")
+                                        currentContestDate = this._contestService.ResetDefaultDateTime(currentContestDate);
+                                        if (currentContestDate >= FromDate)
                                         {
-                                            currentContest.UserName = HandleName;
-                                            _contestList.InsertOne(currentContest);
+                                            int percentage = int.Parse(rank) * 100 / int.Parse(total);
+                                            ClistRank currentContest = new ClistRank();
+                                            currentContest.Id = Guid.NewGuid().ToString();
+                                            currentContest.ContestId = contestId;
+                                            currentContest.ContestName = contestName;
+                                            currentContest.ContestLink = contestLink;
+                                            currentContest.ContestDate = currentContestDate;
+                                            currentContest.Rank = int.Parse(rank);
+                                            currentContest.TotalParticipant = int.Parse(total);
+                                            currentContest.Percentage = percentage;
+                                            currentContest.Point = _contestService.CalculatePointUsingScore(percentage);
+                                            currentContest.ContestPlatform = _contestService.checkContestPlatformName(contestPlatformLink);
+                                            if (currentContest.ContestPlatform != "other")
+                                            {
+                                                currentContest.UserName = HandleName;
+                                                _contestList.InsertOne(currentContest);
+                                            }
                                         }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                        
                                     }
                                 }
                             }
@@ -172,17 +181,18 @@ namespace CPUTracking.Controllers
             }
             ViewBag.Msg = "The contest data for " + HandleName+ " Updated Successfully";
             ViewBag.CoderName = "Id Name: " + HandleName;
+            Console.WriteLine("Data Update Done for user " + HandleName);
             return;
         }
-        public async Task<ActionResult> FinalResult(DateTime FromDate)
+        public async Task<ActionResult> FinalResult(DateTime FromDate, DateTime ToDate)
         {
 
-            List<ContestScore> ContestScoreList = _contestService.GenerateScoreForAllUser(FromDate);
+            List<ContestScore> ContestScoreList = _contestService.GenerateScoreForAllUser(FromDate,ToDate);
             return View(ContestScoreList);
         }
-        public ActionResult DownloadTableData(DateTime FromDate)
+        public ActionResult DownloadTableData(DateTime FromDate, DateTime ToDate)
         {
-            List<ContestScore> ContestScoreList = _contestService.GenerateScoreForAllUser(FromDate);
+            List<ContestScore> ContestScoreList = _contestService.GenerateScoreForAllUser(FromDate, ToDate);
             string csvContent = GenerateCSVContent(ContestScoreList);
             return File(new System.Text.UTF8Encoding().GetBytes(csvContent), "text/csv", "Contest Performance.csv");
         }

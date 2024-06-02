@@ -4,11 +4,48 @@
 }
 <h1>@ViewData["Title"]</h1>
 <hr />
-<div class="searchBar d-flex justify-content-end">
+@*<div class="searchBar d-flex justify-content-end">
+    <div class="input-group input-group-sm" style="width: 350px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Choose End date</span>
+        </div>
+        <input type="date" name="FromDate" class="form-control" placeholder="End date" id="end_date">
+    </div>
+    <hr />
     <a class="btn btn-primary" asp-action="UpdateContestDataForAllUser">Update Data</a>
+</div>*@
+<div>
+    <p>@ViewBag.Msg</p>
+    <p>@ViewBag.CoderName</p>
 </div>
+<form asp-controller="ClistTracking" asp-action="UpdateContestDataForAllUser" class="form-inline">
+    <div class="input-group input-group-sm" style="width: 350px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Choose Start date</span>
+        </div>
+        <input type="date" name="FromDate" class="form-control" placeholder="Start date" id="start_date">
+    </div>
+    <hr />
+    <span>
+        <input class="btn btn-info" type="submit" value="Update Data">
+    </span>
+</form>
 <hr />
 <div class="searchBar d-flex justify-content-start">
+    @*<form asp-controller="ClistTracking" asp-action="FinalResult" class="form-inline">
+            <div class="input-group input-group-sm" style="width: 350px;">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">Choose Start date</span>
+                </div>
+                <input type="date" name="FromDate" class="form-control" placeholder="Start date" id="start_date">
+            </div>
+
+            <hr />
+
+            <span>
+                <input class="btn btn-info" type="submit" value="Generate Score">
+            </span>
+        </form>*@
     <form asp-controller="ClistTracking" asp-action="FinalResult" class="form-inline">
         <div class="input-group input-group-sm" style="width: 350px;">
             <div class="input-group-prepend">
@@ -16,9 +53,14 @@
             </div>
             <input type="date" name="FromDate" class="form-control" placeholder="Start date" id="start_date">
         </div>
-
+        <br>
+        <div class="input-group input-group-sm" style="width: 350px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Choose End date</span>
+            </div>
+            <input type="date" name="ToDate" class="form-control" placeholder="End date" id="end_date">
+        </div>
         <hr />
-
         <span>
             <input class="btn btn-info" type="submit" value="Generate Score">
         </span>
@@ -30,7 +72,13 @@
             </div>
             <input type="date" name="FromDate" class="form-control" placeholder="Start date" id="start_date">
         </div>
-
+        <br>
+        <div class="input-group input-group-sm" style="width: 350px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Choose End date</span>
+            </div>
+            <input type="date" name="ToDate" class="form-control" placeholder="Start date" id="start_date">
+        </div>
         <hr />
 
 
@@ -47,6 +95,7 @@
             </div>
             <input type="text" name="HandleName" class="form-control" placeholder="Handle name" id="handle_name">
         </div>
+        <br>
         <div class="input-group input-group-sm" style="width: 350px;">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="">Choose Start date</span>
@@ -54,6 +103,13 @@
             <input type="date" name="FromDate" class="form-control" placeholder="Start date" id="start_date">
         </div>
 
+        <br>
+        <div class="input-group input-group-sm" style="width: 350px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Choose Start date</span>
+            </div>
+            <input type="date" name="FromDate" class="form-control" placeholder="Start date" id="start_date">
+        </div>
         <hr />
         <input class="btn btn-info" type="submit" value="Submit">
     </form>

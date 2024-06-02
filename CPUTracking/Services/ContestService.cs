@@ -5,6 +5,7 @@ using CPUTracking.Models.Create;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Driver;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static MongoDB.Bson.Serialization.Serializers.SerializerHelper;
 
 namespace CPUTracking.Services
@@ -57,7 +58,7 @@ namespace CPUTracking.Services
             }
         }
 
-        List<ContestScore> IContestService.GenerateScoreForAllUser(DateTime FromDate)
+        List<ContestScore> IContestService.GenerateScoreForAllUser(DateTime FromDate, DateTime ToDate)
         {
             if (FromDate == DateTime.MinValue)
             {
@@ -68,7 +69,7 @@ namespace CPUTracking.Services
             foreach (var member in memberList)
             {
                 string clistHandleName = member.ClistId;
-                List<ClistRank> contestList = _clistContestList.Find(c => c.ContestDate >= FromDate && c.UserName == clistHandleName).SortByDescending(c => c.ContestDate).ToList();
+                List<ClistRank> contestList = _clistContestList.Find(c => c.ContestDate >= FromDate && c.ContestDate<=ToDate && c.UserName == clistHandleName).SortByDescending(c => c.ContestDate).ToList();
                 ContestScore contestScore = new ContestScore();
                 contestScore.Name = member.Name;
                 contestScore.HandleName = clistHandleName;
@@ -215,6 +216,18 @@ namespace CPUTracking.Services
                         index++;
                     }
                 }
+            }
+        }
+
+        public DateTime ResetDefaultDateTime(DateTime? dateTime)
+        {
+            if (dateTime.HasValue && dateTime.Value.Hour >= 18)
+            {
+                return new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day, 0, 0, 0, DateTimeKind.Utc).AddDays(1);
+            }
+            else
+            {
+                return new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day, 0, 0, 0, DateTimeKind.Utc);
             }
         }
     }
