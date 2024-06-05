@@ -142,11 +142,11 @@ namespace CPUTracking.Controllers
                         {
                             CPUMember member = new CPUMember();
                             member.Id = Guid.NewGuid().ToString();
-                            member.Name = (worksheet.Cells[row, 1].Value).ToString();
-                            member.Email = (worksheet.Cells[row, 2].Value).ToString();
-                            member.Session = (worksheet.Cells[row, 3].Value).ToString();
-                            member.PhoneNumber = (worksheet.Cells[row, 4].Value).ToString();
-                            member.ClistId = (worksheet.Cells[row, 5].Value).ToString();
+                            member.Name = (worksheet.Cells[row, 1]?.Value).ToString();
+                            member.Email = (worksheet.Cells[row, 2]?.Value).ToString();
+                            member.Session = (worksheet.Cells[row, 3]?.Value).ToString();
+                            member.PhoneNumber = (worksheet.Cells[row, 4]?.Value).ToString();
+                            member.ClistId = (worksheet.Cells[row, 5]?.Value).ToString();
                             _memberList.InsertOne(member);
                             Console.WriteLine(member);
                         }

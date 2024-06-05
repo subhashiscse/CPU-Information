@@ -11,19 +11,19 @@ namespace CPUTracking.Models.Create
         [BsonRepresentation(BsonType.String)]
         [Required]
         public String? Id { get; set; }
-        public string? Name { get; set; }
+        public string? Name { get; set; } = string.Empty;
         [Required(ErrorMessage = "Email Required")]
         [EmailAddress(ErrorMessage = "Please Enter a Valid Email")]
-        public string? Email { get; set; }
-        public string? SessionId { get; set; }
-        public string? Session { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? CodeforcesId { get; set; }
-        public string? CodechefId { get; set; }
-        public string? AtCoderId { get; set; }
-        public string? LightOjId { get; set; }
-        public string? TophId { get; set; }
-        public string? ClistId { get; set; }
+        public string? Email { get; set; } = string.Empty;
+        public string? SessionId { get; set; } = string.Empty;
+        public string? Session { get; set; } = string.Empty;
+        public string? PhoneNumber { get; set; } = string.Empty;
+        public string? CodeforcesId { get; set; } = string.Empty;
+        public string? CodechefId { get; set; } = string.Empty;
+        public string? AtCoderId { get; set; } = string.Empty;
+        public string? LightOjId { get; set; } = string.Empty;
+        public string? TophId { get; set; } = string.Empty;
+        public string? ClistId { get; set; } = string.Empty;
         public bool IsAdmin { get; set; }
     }
 }
